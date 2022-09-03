@@ -40,12 +40,16 @@ app.get('/menu', jsonParser, async(req, res) => {
 
 // UPDATE
 app.put('/menu/:id', jsonParser, async(req,res) => {
-  const dataMenu = await Menu.findByPk(req.params.id)
-  dataMenu.name = req.body.name
-  dataMenu.description = req.body.description
-  dataMenu.price = req.body.price
-  dataMenu.save() // MAKE SURE
-  res.status(202).send(dataMenu)
+  try{
+    const dataMenu = await Menu.findByPk(req.params.id)
+    dataMenu.name = req.body.name
+    dataMenu.description = req.body.description
+    dataMenu.price = req.body.price
+    await dataMenu.save()
+    res.status(202).send(dataMenu)
+  }catch(error){
+    res.status(422).send('UNABLE TO UPDATE DATA')
+  }
 })
 
 // DELETE
