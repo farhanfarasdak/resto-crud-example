@@ -57,10 +57,11 @@ const handleSubmitEdit = async (menuId) => {
 }
 
 const handleDelete = async (menuId) => {
-  alert('Are you sure?')
-  
-  const resp = await fetch(`http://localhost:7070/menu/${menuId}`, {
-    method: 'DELETE',
-  })
-  location.reload()
+  const confirmation = confirm('Are you sure?')
+  if(confirmation){
+    const resp = await fetch(`http://localhost:7070/menu/${menuId}`, {
+      method: 'DELETE',
+    })
+    location.reload()
+  }
 }
