@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const { Menu } = require('./models')
 
 const app = express()
@@ -17,6 +18,8 @@ app.get('/dashboard', async (req, res) => {
 
   res.render('dashboard', { menus: data})
 })
+
+app.use(cors())
 
 // CREATE
 app.post('/menu', jsonParser, async (req,res) => {
